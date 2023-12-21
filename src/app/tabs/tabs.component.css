@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    height: 60px;
+    --background-blue: #337ab7;
+}
+
+.tab {
+    display: inline-block;
+    border: 1px solid black;
+    color: white;
+    background-color: var(--background-blue);
+    padding: 8px;
+    cursor: pointer;
+}
+
+.tab + .tab {
+    margin-left: 8px;
+}
+
+button {
+    background-color:var(--background-blue);
+    border: none;
+}

@@ -1,0 +1,5 @@
+<span *ngFor="let tabName of tabNames; index as i" class="tab"
+      (click)="setIndex(this._items[i].zip); setItem(this._items[i])">
+    {{tabName}}
+    <button (click)="removeLocation(this._items[i].zip)">X</button>
+</span>
