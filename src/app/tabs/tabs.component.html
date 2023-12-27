@@ -1,5 +1,26 @@
 <span *ngFor="let tabName of tabNames; index as i" class="tab"
-      (click)="setIndex(this._items[i].zip); setItem(this._items[i])">
+      (click)="setIndex(i); setItem(this._items[i])">
     {{tabName}}
-    <button (click)="removeLocation(this._items[i].zip)">X</button>
+    <button (click)="removeLocation(i)">X</button>
 </span>
+
+<app-card *ngIf="entityService.entity | async as item"
+          (click)="appCardClickFunction(item.zip)">
+    <div details>
+        <h3>{{ item.data.name}} ({{ item.zip}})</h3>
+        <h4>Current conditions: {{ item.data.weather[0].main}}</h4>
+        <h4>Temperatures today:</h4>
+        <p>
+            Current {{ item.data.main.temp | number:'.0-0'}}
+            - Max {{ item.data.main.temp_max | number:'.0-0'}}
+            - Min {{ item.data.main.temp_min | number:'.0-0'}}
+        </p>
+        <p>
+            <a [routerLink]="['/forecast', item.zip]" >Show 5-day forecast for {{ item.data.name}}</a>
+        </p>
+    </div>
+    <div image>
+        <span class="close" (click)="removeLocation(entityService.index.getValue())">&times;</span>
+        <img [src]="imageSource(item.data.weather[0].id)">
+    </div>
+</app-card>

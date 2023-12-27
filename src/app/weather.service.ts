@@ -8,6 +8,7 @@ import {Forecast} from './forecasts-list/forecast.type';
 import {LOCATIONS, LocationService} from './location.service';
 import {map, tap} from 'rxjs/operators';
 import {CacheService} from './cache.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class WeatherService {
@@ -21,7 +22,8 @@ export class WeatherService {
 
     constructor(private http: HttpClient,
                 private locationService: LocationService,
-                private cacheService: CacheService) {
+                private cacheService: CacheService,
+                private router: Router) {
         this.locationService.locations
             .pipe(
                 tap((zipcodes) => {
@@ -128,4 +130,7 @@ export class WeatherService {
         }
     }
 
+    showForecast(zipcode : string){
+        this.router.navigate(['/forecast', zipcode])
+    }
 }
